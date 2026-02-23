@@ -1,98 +1,134 @@
-📘 AWS VPC Traffic Flow & Security Project
+<h1 align="center">AWS VPC Traffic Flow & Security Project</h1>
+
 <p align="center">
-<strong>Hands-on cloud networking & security lab built on AWS</strong><br>
-VPC • Subnets • Route Tables • Internet Gateway • Security Groups • NACLs
+  <strong>Hands-on cloud networking & security lab built on AWS</strong><br>
+  VPC • Subnets • Route Tables • Internet Gateway • Security Groups • NACLs
 </p>
 
-🚀 Overview
-This project demonstrates how I designed and deployed a secure Amazon Virtual Private Cloud (VPC) environment.
+---
+
+## 🚀 Overview
+
+This project demonstrates how I designed and deployed a secure Amazon Virtual Private Cloud (VPC) (VPC) environment.  
 It covers essential AWS networking components including:
 
-VPC
+- VPC  
+- Public Subnet  
+- Internet Gateway  
+- Route Tables  
+- Security Groups  
+- Network ACLs  
 
-Public Subnet
+The goal was to understand traffic flow, security boundaries, and how AWS networking works in real-world scenarios.  
+This project was built as part of my DevOps/DevSecOps learning journey.
 
-Internet Gateway
+---
 
-Route Tables
+## 🧠 What is Amazon VPC?
 
-Security Groups
+Amazon VPC is an isolated virtual network inside AWS where you can run resources privately or publicly.  
+It allows control over:
 
-Network ACLs
+- IP addressing  
+- Subnets  
+- Routing  
+- Security layers  
 
-The goal was to understand traffic flow, security boundaries, and how AWS networking works in real-world scenarios.
-This project was built as part of my DevOps/DevSecOps learning journey. 
+In this project, I used VPC to create a public subnet, attach an Internet Gateway, configure routing, and secure resources using Security Groups and Network ACLs.
 
-🧠 What is Amazon VPC?
-Amazon VPC is an isolated virtual network inside AWS where you can run resources privately or publicly.
-It allows full control over:
+---
 
-IP addressing
+## 🛠️ What I Built
 
-Subnets
+### 1. Custom VPC
 
-Routing
+- Created a dedicated VPC to host all resources.
 
-Security layers
+### 2. Public Subnet
 
-In this project, I used VPC to create a public subnet, attach an Internet Gateway, configure routing, and secure resources using Security Groups and Network ACLs. 
+- Assigned a CIDR block.
+- Configured it for internet-facing resources.
 
-🛠️ What I Built
-1. Created a Custom VPC
-A dedicated virtual network to host all resources.
+### 3. Internet Gateway
 
-2. Public Subnet
-Assigned a CIDR block and configured it for internet-facing resources.
+- Created and attached an Internet Gateway (IGW) to the VPC.
+- Enabled inbound and outbound internet connectivity.
 
-3. Internet Gateway
-Attached an IGW to the VPC to enable inbound/outbound internet connectivity. 
+### 4. Route Table
 
-4. Route Table
-Created a custom route table
+- Created a custom route table.
+- Added a route:
+  - Destination: `0.0.0.0/0`
+  - Target: Internet Gateway
+- Associated the route table with the public subnet.
 
-Added a route:
+This made the subnet truly public.
 
-Destination: 0.0.0.0/0
+### 5. Security Groups
 
-Target: Internet Gateway
-
-Associated it with the public subnet
-This made the subnet truly public. 
-
-5. Security Groups
 Security Groups act as resource-level firewalls.
 
-Inbound rule: Allowed HTTP traffic from any IP
+- Inbound: allowed HTTP traffic from any IP.
+- Outbound: allowed all outbound traffic (default AWS behavior).
 
-Outbound rule: Allowed all outbound traffic (default AWS behavior) 
+### 6. Network ACLs (NACLs)
 
-6. Network ACLs (NACLs)
-Subnet-level firewalls that allow or deny traffic entering/leaving the subnet.
+Network ACLs act as subnet-level firewalls.
 
-Default NACLs allow all traffic
+- Default NACLs allow all traffic.
+- Custom NACLs deny all traffic until rules are added.
 
-Custom NACLs deny all traffic until rules are added 
+---
 
-🔐 Security Groups vs Network ACLs
-Feature	Security Group	Network ACL
-Layer	Resource level	Subnet level
-Stateful	Yes	No
-Default behavior	Allow outbound	Allow all (default), deny all (custom)
-Use case	Protect individual resources	Protect entire subnets
+## 🔐 Security Groups vs Network ACLs
 
-🌍 Route Tables & Traffic Flow
+| Feature           | Security Group     | Network ACL        |
+|------------------|--------------------|--------------------|
+| Layer            | Resource level     | Subnet level       |
+| Stateful         | Yes                | No                 |
+| Default behavior | Allow outbound     | Allow all (default), deny all (custom) |
+| Use case         | Protect resources  | Protect subnets    |
+
+---
+
+## 🌍 Route Tables & Traffic Flow
+
 Route tables determine how traffic moves inside the VPC and to the internet.
 
 To make a subnet public, it must have:
 
-An Internet Gateway
+- An Internet Gateway.
+- A route sending `0.0.0.0/0` traffic to the IGW.
 
-A route sending 0.0.0.0/0 traffic to the IGW
+Without this, even a “public” subnet cannot access the internet.
 
-Without this, even a “public” subnet cannot access the internet. 
+---
 
-🧩 What Surprised Me
-I didn’t expect the project to be this interesting and straightforward.
-It helped me understand how AWS networking pieces fit together. 
+## 🧩 What Surprised Me
 
+I didn’t expect the project to be this interesting and straightforward.  
+It helped me understand how AWS networking pieces fit together.
 
+---
+
+## ⏱️ Time Spent
+
+This project took me about **1 hour** to complete and gave me a strong foundation in AWS networking and security basics.
+
+---
+
+## 📸 Screenshots
+
+Screenshots are stored in the `screenshots/` folder.
+
+Example files:
+
+- `screenshots/vpc-architecture.png`
+- `screenshots/route-table.png`
+- `screenshots/security-group.png`
+- `screenshots/nacl-rules.png`
+
+You can embed one like this:
+
+```md
+![VPC Architecture](screenshots/vpc-architecture.png)
