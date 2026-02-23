@@ -123,7 +123,8 @@ Screenshots are stored in the `screenshots/` folder.
 
 Example files:
 
-- `screenshots/vpc-architecture.png`
+- `screenshots/vpc.png`
+- '[VPC Architecture](screenshots/vpc.png)'
 - `screenshots/route-table.png`
 - `screenshots/security-group.png`
 - `screenshots/nacl-rules.png`
